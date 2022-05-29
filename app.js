@@ -52,7 +52,7 @@ app.get("/",function(request,response){
         console.log(totalDeaths);//total deaths globally
         console.log(countryTotal);//total india
         console.log(countryDeaths);//total deaths in india
-        response.render('index',{totalCases:totalCases,totalDeaths:totalDeaths,countryTotal:countryTotal,countryDeaths:countryDeaths,labelsList:xAxis,dataList:yAxis});//check
+        response.render('index',{totalCases:totalCases,totalDeaths:totalDeaths,countryTotal:countryTotal,countryDeaths:countryDeaths});//check
     });
 
     res.on("error", function (error) {
@@ -67,13 +67,21 @@ app.get("/",function(request,response){
 
 app.get("/country",function(request,response){
 
+
+    // response.sendFile(__dirname+"/country.html");
+    response.render('country',{countryName:userCountry,yAxis:yAxis,xAxis:xAxis});
+})
+
+app.post("/country",function(request,response){
+    userCountry=request.body.countryName;
+    response.redirect("/country");
     var https = require('follow-redirects').https;
     var fs = require('fs');
 
     var options = {
     'method': 'GET',
     'hostname': 'api.covid19api.com',
-    'path': '/total/dayone/country/south-africa/status/confirmed',
+    'path': '/total/dayone/country/'+userCountry+'/status/confirmed',
     'headers': {
     },
     'maxRedirects': 20
@@ -117,7 +125,7 @@ app.get("/country",function(request,response){
             xAxis.push(priorDateText);
         }   
         xAxis.reverse();
-        console.log(today);
+        // console.log(today);
         console.log(xAxis);
 
     });
@@ -128,14 +136,11 @@ app.get("/country",function(request,response){
     });
 
     req.end();
-    // response.sendFile(__dirname+"/country.html");
-    response.render('country',{countryName:userCountry,yAxis:yAxis,xAxis:xAxis});
-})
-
-app.post("/country",function(request,response){
-    userCountry=request.body.countryName;
     // console.log(userCountry);
-    response.redirect("/country");
+    console.log(userCountry);
+    console.log(xAxis);
+    console.log(yAxis);
+    
 })
 
 app.listen(3000,function(){
