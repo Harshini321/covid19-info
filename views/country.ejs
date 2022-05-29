@@ -10,6 +10,7 @@
 <body>
     
     <h1><%= countryName %> Covid Info</h1>
+
     <form action="/country" method="post" class="item">
         <input type="text" name="countryName" placeholder="Country"  >
         <button type="submit" name="list" >Go</button>
@@ -21,14 +22,23 @@
     <script>
         //include script for chart.js and get data from app.js (x axis and y axis data)
         //connect this to country.ejs
+
+        //this is to extract x-axis and y-axis data
+
+
+        const labelsList= '<%= xAxis %>';
+        const finalx=labelsList.split(",");
+
+        const dataList='<%= yAxis %>'
+        const finaly=dataList.split(",");
         const ctx = document.getElementById('myChart');
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels:  ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels:finalx,
                 datasets: [{
                     label: 'Total Cases',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: finaly,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
