@@ -41,7 +41,6 @@ app.get("/",function(request,response){
 
     res.on("end", function (chunk) {
         var body = Buffer.concat(chunks);
-        // console.log(body.toString());
         var covidData=JSON.parse(body);
 
         totalCases=covidData.Global.TotalConfirmed;//total globally
@@ -59,7 +58,7 @@ app.get("/",function(request,response){
         console.error(error);
     });
     });
-    
+
     req.end();
     
 })
@@ -67,14 +66,6 @@ app.get("/",function(request,response){
 
 app.get("/country",function(request,response){
 
-
-    // response.sendFile(__dirname+"/country.html");
-    response.render('country',{countryName:userCountry,yAxis:yAxis,xAxis:xAxis});
-})
-
-app.post("/country",function(request,response){
-    userCountry=request.body.countryName;
-    response.redirect("/country");
     var https = require('follow-redirects').https;
     var fs = require('fs');
 
@@ -98,12 +89,9 @@ app.post("/country",function(request,response){
         xAxis=[];
         yAxis=[];
         var body = Buffer.concat(chunks);
-        // console.log(body.toString());
+
         var countryData=JSON.parse(body);
-        // for (let i=0;i<5;i++){
-        //     yAxis.push(countryData[i].Cases)
-        // }
-        
+
         var newCases;
         for(let i=countryData.length-1;i>countryData.length-21;i--){
             newCases=countryData[i].Cases-countryData[i-1].Cases
@@ -115,7 +103,6 @@ app.post("/country",function(request,response){
         const today=new Date();
         const text=today.toLocaleDateString();
 
-        
         var priorDate;
         var priorDateText;
         
@@ -125,9 +112,7 @@ app.post("/country",function(request,response){
             xAxis.push(priorDateText);
         }   
         xAxis.reverse();
-        // console.log(today);
-        console.log(xAxis);
-
+        response.render('country',{countryName:userCountry,yAxis:yAxis,xAxis:xAxis});
     });
 
     res.on("error", function (error) {
@@ -136,11 +121,11 @@ app.post("/country",function(request,response){
     });
 
     req.end();
-    // console.log(userCountry);
-    console.log(userCountry);
-    console.log(xAxis);
-    console.log(yAxis);
-    
+})
+
+app.post("/country",function(request,response){
+    userCountry=request.body.countryName;
+    response.redirect("/country");
 })
 
 app.listen(3000,function(){
