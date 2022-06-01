@@ -51,8 +51,8 @@
 
   <!-- chart -->
   <section id="chart">
-    <div>
-      <canvas id="myChart" width="50" height="50"></canvas>
+  <div>
+      <canvas id="myChart" class="shadow-lg p-3 mb-5 bg-body rounded" width="50" height="25"></canvas>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
   <script>
@@ -94,6 +94,8 @@
               }]
           },
           options: {
+              respnsive:false,
+              maintainAspectRation:false,
               scales: {
                   y: {
                       beginAtZero: true

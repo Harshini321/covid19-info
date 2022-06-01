@@ -203,5 +203,8 @@ body{
     border-color: #5f1782 !important;
     box-shadow: 0 0 0 0.2rem rgba(227, 83, 229, 0.25) !important;
     background-color: #5f1782 !important;
-    color: white;
+    color: white !important;
+}
+#myChart{
+    margin: 50px 140px 500px 140px;
 }
