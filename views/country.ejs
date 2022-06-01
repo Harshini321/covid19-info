@@ -1,74 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Covid19</title>
-    
-</head>
-<body>
-    
-    <h1><%= countryName %> Covid Info</h1>
+<%- include("header") -%>
+  <section id="head">
 
-    <form action="/country" method="post" class="item">
-        <input type="text" name="countryName" placeholder="Country"  >
-        <button type="submit" name="list" >Go</button>
-    </form>
-    <div>
-        <canvas id="myChart" width="50" height="50"></canvas>
+    <div class="container ">
+      <!-- <div class="shadow-lg p-3 mb-5 bg-body rounded move1">
+        <form action="/country" method="post" class="item">
+          <input type="text" name="countryName" placeholder="Country"  >
+          <input type="text" name="noOfDays" placeholder="Days">
+          <button type="submit" name="list" >Go</button>
+        </form>
+      </div> -->
+      <form action="/country" method="post" class="item">
+        
+      <div class="row g-3">
+        <div class="col-md move2">
+          <div class="form-floating">
+            <select class="form-select" id="floatingSelectGrid" name="countryName">
+              <option selected >India</option>
+              <option value="Afghanistan">Afghanistan</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <label for="floatingSelectGrid" >Select Country</label>
+          </div>
+        </div>
+        <div class="col-md move2">
+          <div class="form-floating">
+            <select class="form-select" id="floatingSelectGrid" name="noOfDays">
+              <option selected>10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="25">25</option>
+              <option value="30">30</option>
+            </select>
+            <label for="floatingSelectGrid">Select Number Of Days</label>
+          </div>
+        </div>
+        <div class="col-md move2">
+            <div class="col-12">
+              <!-- <button type="submit" name="list" class="btn btn-primary" >Go</button> -->
+              <button type="submit" id="button" class="btn btn-outline-primary btn-lg change">Go</button>
+            </div>
+        </div>
+      </form>
+      </div>
+      <div class="shadow p-3 mb-5 bg-body rounded move">
+        Covid Cases In <%= countryName %> In last <%= userDays%> Days
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
-    <script>
-        //include script for chart.js and get data from app.js (x axis and y axis data)
-        //connect this to country.ejs
+  </section>
 
-        //this is to extract x-axis and y-axis data
+  <!-- chart -->
+  <section id="chart">
+    <div>
+      <canvas id="myChart" width="50" height="50"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+  <script>
+      //include script for chart.js and get data from app.js (x axis and y axis data)
+      //connect this to country.ejs
 
-        const labelsList= '<%= xAxis %>';
-        const finalx=labelsList.split(",");
+      //this is to extract x-axis and y-axis data
 
-        const dataList='<%= yAxis %>'
-        const finaly=dataList.split(",");
-        const ctx = document.getElementById('myChart');
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels:finalx,
-                datasets: [{
-                    label: 'Total Cases',
-                    data: finaly,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
+      const labelsList= '<%= xAxis %>';
+      const finalx=labelsList.split(",");
 
-
-    <!-- <script src="/trial.js"></script> -->
+      const dataList='<%= yAxis %>'
+      const finaly=dataList.split(",");
+      const ctx = document.getElementById('myChart');
+      const myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels:finalx,
+              datasets: [{
+                  label: 'Total Cases',
+                  data: finaly,
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+  </script>
+  </section>
+    
 
 </body>
 </html>

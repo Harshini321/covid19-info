@@ -15,6 +15,7 @@ var countryDeaths;
 
 
 var userCountry;
+var userDays;
 var xAxis=[];
 var yAxis=[];
 
@@ -91,11 +92,14 @@ app.get("/country",function(request,response){
         var body = Buffer.concat(chunks);
 
         var countryData=JSON.parse(body);
-
+        console.log(countryData.length);
         var newCases;
-        for(let i=countryData.length-1;i>countryData.length-21;i--){
-            newCases=countryData[i].Cases-countryData[i-1].Cases
+        var temp=countryData.length-userDays-1;
+        console.log(temp);
+        for(let i=((countryData.length)-1);i>temp;i--){
+            newCases=countryData[i].Cases-countryData[i-1].Cases;
             yAxis.push(newCases);
+            console.log(i);
         }
         yAxis.reverse();
         console.log(yAxis);
@@ -106,13 +110,14 @@ app.get("/country",function(request,response){
         var priorDate;
         var priorDateText;
         
-        for (let j=0;j<20;j++){
+        for (let j=0;j<userDays;j++){
             priorDate=new Date(new Date().setDate(today.getDate()-j));
             priorDateText=priorDate.toLocaleDateString();
             xAxis.push(priorDateText);
         }   
         xAxis.reverse();
-        response.render('country',{countryName:userCountry,yAxis:yAxis,xAxis:xAxis});
+        console.log(xAxis);
+        response.render('country',{countryName:userCountry,userDays:userDays,yAxis:yAxis,xAxis:xAxis});
     });
 
     res.on("error", function (error) {
@@ -125,7 +130,11 @@ app.get("/country",function(request,response){
 
 app.post("/country",function(request,response){
     userCountry=request.body.countryName;
+    userDays=request.body.noOfDays;
+    // console.log(request.body);
     response.redirect("/country");
+    console.log(userCountry);
+    console.log(userDays);
 })
 
 app.listen(3000,function(){

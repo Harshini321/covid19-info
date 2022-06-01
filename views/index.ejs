@@ -1,23 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Covid19</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
-</head>
-<body>
-    <h1>Covid 19 Info</h1>
-    <h1>Total cases recorded till date , World wide : <%= totalCases %></h1>
-    <h1>Total deaths till date , World wide : <%= totalDeaths %></h1>
-    <h1>Total cases recorded till date in India : <%= countryTotal %></h1>
-    <h1>Total deaths recorded till date in India : <%= countryDeaths %></h1>
+<%- include("header") -%>
 
+    <!-- home page -->
+    <section id="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="home-title">WANT TO KNOW THE LIVE COVID 19 INFO?</p>
+                    <p class="home-text">Dont worry you are at the right place</p>
+                    <a href="/country" class="btn btn-outline btn-lg btn-block active move" role="button" aria-pressed="true">Get Country Wise Info</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="images/homeimg.png" alt="covid image" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <img src="images/wave1.png" alt="waves" class="waves">
+    </section>
+
+    <!-- world and india covid info -->
+
+    <section id="info">
+            <div class="container">
+                <div class="info_head">
+                    <h2 >GET THE LIVE INFO OF COVID 19 CASES</h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 ">
+                      <div class="card shadow-lg">
+                        <div class="card-body">
+                          <h3 class="card-title">World Wide</h3>
+                          <p class="card-text">Information recorded till date</p>
+                          <p class="card-text blue">Total Cases : <%= totalCases %></p>
+                          <p class="card-text red">Total Deaths : <%= totalDeaths %></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="card shadow-lg">
+                        <div class="card-body">
+                          <h3 class="card-title">In India</h3>
+                          <p class="card-text">Information recorded till date</p>
+                          <p class="card-text blue">Total Cases : <%= countryTotal %></p>
+                          <p class="card-text red">Total Deaths : <%= countryDeaths %></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+    </section>
+
+    <!-- contact us -->
+    <section id="contact">
+        <img src="images/wave2.png" alt="wave2" class="contact-img">
+        <div class="container con">
+            <p class="contact-text">MADE BY : HARSHINI</p>
+            <p class="contact-text">CONTACT US</p>
+            <div class="icons">
+                <a href="#"><img src="images/instagram-icon.png" alt="insta"></a>
+                <a href="#"><img src="images/twitter-icon.png" alt="twitter"></a>
+                <a href="#"><img src="images/facebook-icon.png" alt="facebook"></a>
+                <a href="#"><img src="images/linkedin-icon.png" alt="linkedin"></a>
+            </div>
+        </div>
+    </section>
+<!-- 
     <form action="/country" method="post" class="item">
         <input type="text" name="countryName" placeholder="Country"  >
         <button type="submit" name="list" >Go</button>
-    </form>
+    </form> --> 
 
 </body>
 </html>
