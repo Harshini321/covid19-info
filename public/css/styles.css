@@ -1,3 +1,4 @@
+/* home page styles */
 html{
     margin: 0;
     padding: 0;
@@ -7,6 +8,9 @@ html{
 body{
     font-family: sans-serif;
 }
+
+/* nav bar */
+
 #nav-bar{
     position: sticky;
     top: 0;
@@ -49,7 +53,9 @@ body{
 .container-fluid a:hover{
     color: #ECD662;
 }
+/* .navbar-toggler{
 
+} */
 
 
 
@@ -101,6 +107,9 @@ body{
     margin-top: 20px;
     border-radius: 10%;
 }
+.space{
+    margin-bottom: 150px;
+}
 .card:hover {
     transform: translateY(-10px);
 }
@@ -133,7 +142,7 @@ body{
     /* margin: 100px 0 30px; */
 }
 .con{
-    padding: 5px 0 50px;
+    padding: 5px 0 25px;
 }
 .icons img{
     width: 40px;
@@ -185,14 +194,23 @@ body{
     margin-top: 5px;
     color: #5f1782 !important;
     border-color: #5f1782 !important;
+    border-width: 3px;
 }
 .change:hover{
     color: aliceblue !important;
     border-color: aliceblue !important;
     background-color: #5f1782 !important;
 }
-#floatingSelectGrid:hover{
+
+.form-select{
+    padding-bottom: 5px !important;
+}
+#floatingSelectGrid{
     border-color: #5f1782;
+    border-width: 3px;
+}
+#floatingSelectGrid:hover{
+    border-color: palevioletred ;
 }
 #floatingSelectGrid:focus{
     /* box-shadow: #a517ba !important; */
@@ -206,5 +224,9 @@ body{
     color: white !important;
 }
 #myChart{
-    margin: 50px 140px 500px 140px;
+    margin: 50px 140px 100px 140px;
+}
+
+.color{
+    color: #5f1782;
 }

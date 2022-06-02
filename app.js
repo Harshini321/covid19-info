@@ -18,12 +18,11 @@ var userCountry;
 var userDays;
 var xAxis=[];
 var yAxis=[];
-
+var countriesList=[];
 
 
 
 app.get("/",function(request,response){
-
     var options = {
     'method': 'GET',
     'hostname': 'api.covid19api.com',
@@ -39,10 +38,17 @@ app.get("/",function(request,response){
     res.on("data", function (chunk) {
         chunks.push(chunk);
     });
-
+    countriesList=[];
     res.on("end", function (chunk) {
         var body = Buffer.concat(chunks);
         var covidData=JSON.parse(body);
+
+        // Countrieslist
+        console.log(covidData.Countries.length);
+        for (let i=0;i<covidData.Countries.length;i++){
+            countriesList.push(covidData.Countries[i].Country);
+        }
+        console.log(countriesList);
 
         totalCases=covidData.Global.TotalConfirmed;//total globally
         totalDeaths=covidData.Global.TotalDeaths
@@ -117,7 +123,7 @@ app.get("/country",function(request,response){
         }   
         xAxis.reverse();
         console.log(xAxis);
-        response.render('country',{countryName:userCountry,userDays:userDays,yAxis:yAxis,xAxis:xAxis});
+        response.render('country',{countryName:userCountry,userDays:userDays,yAxis:yAxis,xAxis:xAxis,countriesList:countriesList});
     });
 
     res.on("error", function (error) {

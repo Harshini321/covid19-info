@@ -1,26 +1,21 @@
 <%- include("header") -%>
-  <section id="head">
 
+<div id="vanta-canvas">
+
+
+  <section id="head">
     <div class="container ">
-      <!-- <div class="shadow-lg p-3 mb-5 bg-body rounded move1">
-        <form action="/country" method="post" class="item">
-          <input type="text" name="countryName" placeholder="Country"  >
-          <input type="text" name="noOfDays" placeholder="Days">
-          <button type="submit" name="list" >Go</button>
-        </form>
-      </div> -->
-      <form action="/country" method="post" class="item">
-        
+      <form action="/country" method="post" class="item">  
       <div class="row g-3">
         <div class="col-md move2">
           <div class="form-floating">
             <select class="form-select" id="floatingSelectGrid" name="countryName">
               <option selected >India</option>
-              <option value="Afghanistan">Afghanistan</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <% for(let i=0; i<countriesList.length;i++){%>
+                  <option value= <%= countriesList[i] %> > <%= countriesList[i] %> </option>
+              <%}%>
             </select>
-            <label for="floatingSelectGrid" >Select Country</label>
+            <label for="floatingSelectGrid" class="color">Select Country</label>
           </div>
         </div>
         <div class="col-md move2">
@@ -32,28 +27,30 @@
               <option value="25">25</option>
               <option value="30">30</option>
             </select>
-            <label for="floatingSelectGrid">Select Number Of Days</label>
+            <label for="floatingSelectGrid" class="color">Select Number Of Days</label>
           </div>
         </div>
         <div class="col-md move2">
             <div class="col-12">
-              <!-- <button type="submit" name="list" class="btn btn-primary" >Go</button> -->
               <button type="submit" id="button" class="btn btn-outline-primary btn-lg change">Go</button>
             </div>
         </div>
       </form>
       </div>
       <div class="shadow p-3 mb-5 bg-body rounded move">
-        Covid Cases In <%= countryName %> In last <%= userDays%> Days
+        Covid Cases In <strong><%= countryName %></strong> In last <strong><%= userDays%></strong> Days
       </div>
     </div>
   </section>
 
   <!-- chart -->
-  <section id="chart">
-  <div>
+  <section id="chart" class="container-fluid ">
+  <div class="container-fluid " >
       <canvas id="myChart" class="shadow-lg p-3 mb-5 bg-body rounded" width="50" height="25"></canvas>
+        <!-- aninmation -->
   </div>
+
+  <!-- chart -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
   <script>
       //include script for chart.js and get data from app.js (x axis and y axis data)
@@ -94,7 +91,7 @@
               }]
           },
           options: {
-              respnsive:false,
+              respnsive:true,
               maintainAspectRation:false,
               scales: {
                   y: {
@@ -104,8 +101,26 @@
           }
       });
   </script>
-  </section>
-    
 
+
+  </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script>
+    VANTA.NET({
+      el: "#vanta-canvas",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      backgroundColor: 0xffffff
+    })
+    </script>
+</div>
+
+  
 </body>
 </html>
