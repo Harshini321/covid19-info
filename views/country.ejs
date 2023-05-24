@@ -4,15 +4,15 @@
   <!-- head section of /country page -->
   <section id="head">
     <div class="container ">
-      <form action="/country" method="post" class="item">  
+      <form action="/state" method="post" class="item">  
       <div class="row g-3">
         <!-- select column1 -->
         <div class="col-md move2">
           <div class="form-floating">
             <select class="form-select" id="floatingSelectGrid" name="countryName">
-              <option selected >India</option>
+              <option selected >Andaman and Nicobar</option>
               <% for(let i=0; i<countriesList.length;i++){%>
-                  <option value= <%= countriesList[i] %> > <%= countriesList[i] %> </option>
+                  <option value= <%= countriesList[i][1] %> > <%= countriesList[i][0] %> </option>
               <%}%>
             </select>
             <label for="floatingSelectGrid" class="color">Select Country</label>
@@ -26,11 +26,20 @@
               <option value="15">15</option>
               <option value="20">20</option>
               <option value="25">25</option>
-              <option value="30">30</option>
+              <!-- <option value="30">30</option> -->
             </select>
             <label for="floatingSelectGrid" class="color">Select Number Of Days</label>
           </div>
         </div>
+        <div class="col-md move2">
+          <div class="form-floating">
+            <!-- <select class="form-select" id="floatingSelectGrid" name="startDate"> -->
+              <input class="form-select" id="floatingSelectGrid" type="date" id="dateInput" name="startDate" min="2021-01-01" max="2021-08-31">
+            <!-- </select> -->
+            <label for="floatingSelectGrid" class="color">Select startDate</label>
+          </div>
+        </div>
+        
         <!-- button -->
         <div class="col-md move2">
             <div class="col-12">
@@ -62,7 +71,7 @@
       // creating chart
       const ctx = document.getElementById('myChart');
       const myChart = new Chart(ctx, {
-          type: 'bar',
+          type: 'line',
           data: {
               labels:finalx,
               datasets: [{

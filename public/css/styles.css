@@ -100,14 +100,16 @@ body{
     padding-bottom: 50px;
     text-align: center;
     margin-top: 20px;
-    border-radius: 10%;
+    border-radius: 20px;
 }
 .space{
     margin-bottom: 150px;
 }
 .card:hover {
     transform: translateY(-10px);
+    transition: 0.5s;
 }
+
 .col-md-6 a:hover {
     color:#ECD662;
 }
